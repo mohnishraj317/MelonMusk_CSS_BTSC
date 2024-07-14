@@ -1,0 +1,131 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --color-400: #F8EDE3;
+  --color-300: #DFD3C3;
+  --color-200: #D0B8A8;
+  --color-100: #8D493A;
+}
+
+body {
+  height: 100vh;
+  width: 100vw;
+  background: linear-gradient(45deg, var(--color-300), var(--color-400));
+  color: var(--color-100)
+}
+
+.container {
+  --size: 200px;
+  --ball-size: 16%;
+  position: relative;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  height: var(--size);
+  width: var(--size);
+  background: url("./maze.png");
+  background-size: cover;
+  outline: .5rem solid var(--color-200);
+}
+
+.ball {
+  height: var(--ball-size);
+  width: var(--ball-size);
+  padding: 1rem;
+  border-radius: 50%;
+  background: var(--color-300);
+  position: absolute;
+  animation: move 4s linear infinite;
+  animation-play-state: paused;
+}
+
+.instructions {
+  position: absolute;
+  left: 50%;
+  top: calc(50% + 8rem);
+  transform: translate(-50%, -50%);
+  font-family: "Comic sans", "Arial";
+}
+
+.controls {
+  background: var(--color-300);
+  border-radius: .5rem;
+  padding: 1rem;
+  position: absolute;
+  left: 50%;
+  top: calc(50% + 12rem);
+  transform: translate(-50%, -50%);
+
+  button {
+    border: 0;
+    padding: 1rem;
+    cursor: pointer;
+    background: #0000;
+    transition: 300ms;
+    border-radius: .2rem;
+    border: 1px solid var(--color-100);
+    color: var(--color-100);
+
+    &:hover {
+      filter: brightness(90%);
+      scale: .95;
+      background: var(--color-100);
+      color: var(--color-400);
+    }
+
+    &:active {
+      filter: brightness(85%);
+      scale: .9;
+    }
+  }
+}
+
+@keyframes move {
+  0% {
+    top: calc(95% - var(--ball-size));
+    left: 4%;
+  }
+
+  18% {
+    left: 40%;
+    top: calc(95% - var(--ball-size));
+  }
+
+  24% {
+    left: 40%;
+    top: calc(95% - var(--ball-size) * 2 - 2%)
+  }
+
+  42% {
+    left: 4%;
+    top: calc(95% - var(--ball-size) * 2 - 2%);
+  }
+
+  60% {
+    left: 4%;
+    top: calc(var(--ball-size) + 8%);
+  }
+
+  91% {
+    top: calc(var(--ball-size) + 8%);
+    left: calc(100% - var(--ball-size) - 4%);
+  }
+
+  100% {
+    left: calc(95% - var(--ball-size));
+    top: 4%;
+  }
+}
+
+@media (prefers-color-scheme: light) {
+  :root {
+    --color-400: #17153B;
+    --color-300: #2E236C;
+    --color-200: #433D8B;
+    --color-100: #C8ACD6;
+  }
+}

@@ -10,9 +10,11 @@
 }
 
 body {
-  background: hsl(from midnightblue h s 20%);
+  background: hsl(from midnightblue h s 10%);
   height: 100vh;
   width: 100vw;
+  overflow: hidden;
+  position: absolute;
 }
 
 .harry-and-wand {
@@ -23,6 +25,8 @@ body {
   transform: translate(calc(var(--x) - 50%), calc(var(--y) - 50%));
   transition: 1s;
   filter: drop-shadow(0 0 4px #0004);
+  position: absolute;
+  z-index: 999;
 }
 
 .harry {
@@ -230,23 +234,95 @@ body {
 }
 
 .stars>.star {
-  height: 2px;
-  width: 2px;
+  height: var(--size);
+  width: var(--size);
   background: white;
   position: absolute;
-  top: 100px;
-  left: 400px;
   filter: drop-shadow(0 0 2px white);
   animation: twinkle 1s linear infinite;
   animation-delay: var(--delay);
 }
 
-.star-1 {
-  --delay: 300ms
+.clouds>.cloud {
+  --opacity: .8;
+  background: rgb(from white r g b / var(--opacity));
+  height: 2rem;
+  width: 4rem;
+  border-radius: 4rem;
+  position: absolute;
+  top: var(--y);
+  left: var(--x);
+  opacity: 0;
+
+  &.variant-1 {
+    width: 6rem;
+  }
+
+  &.variant-2 {
+    width: 5rem;
+
+    &::before {
+      content: "";
+      position: relative;
+      top: -100%;
+      left: 20%;
+      width: 150%;
+      height: 100%;
+      background: rgb(from white r g b / var(--opacity));
+      border-radius: 4rem;
+      display: block;
+    }
+  }
+
+  &.variant-3 {
+
+    &::after,
+    &::before {
+      content: "";
+      height: 100%;
+      background: rgb(from white r g b / var(--opacity));
+      border-radius: 4rem;
+      display: block;
+      position: relative;
+    }
+
+    &::before {
+      width: 120%;
+      top: 100%;
+      left: -10%;
+    }
+
+    &::after {
+      width: 200%;
+      top: 100%;
+      left: -20%;
+    }
+  }
 }
 
-.star-2 {
-  --delay: 400ms
+.moon {
+  height: 4rem;
+  width: 4rem;
+  background: ghostwhite;
+  position: absolute;
+  top: 10%;
+  right: 20%;
+  border-radius: 50%;
+  box-shadow: 0 0 0 1rem #fff7,
+    0 0 0 4rem #fff4,
+    0 0 0 6rem #fff1;
+
+  &::before {
+    content: "";
+    height: 600%;
+    width: 600%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: #fff1;
+    border-radius: 50%;
+  }
 }
 
 @keyframes move {
